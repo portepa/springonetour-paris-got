@@ -1,0 +1,5 @@
+postgresqlPassword: easypassword
+postgresqlDatabase: mydb
+service:
+  type: LoadBalancer
+  
