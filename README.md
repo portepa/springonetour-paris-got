@@ -44,6 +44,18 @@ We can also show that during this helm installation we leveraged Persistent Exte
 
 ## Deploy the service broker
 
+### Optional step
+
+We can build the docker image using the [cloud native buildpacks](buildpacks.io).
+
+```sh
+cd generic-service-broker
+pack build portepa/service-broker
+docker push portepa/service-broker
+```
+
+### Deploying to K8S
+
 You need to wait for the ip of the service to spawn, then modify the `service-broker.yml`.
 
 ```sh
