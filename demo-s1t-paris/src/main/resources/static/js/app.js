@@ -1,16 +1,29 @@
 var stompClient = null;
 
-function setConnected(connected) {
-    document.getElementById('conversationDiv').style.visibility
-        = connected ? 'visible' : 'hidden';
-    document.getElementById('response').innerHTML = '';
+let votes = [];
+
+function httpGet(theUrl, callback)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous
+    xmlHttp.send(null);
 }
+
+
+httpGet('/vote', function(data) {
+    console.log(data);
+    votes = JSON.parse(data);
+    render();
+});
 
 function connect() {
     var socket = new SockJS('/sockjs');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
-        setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/vote', function (messageOutput) {
             showMessageOutput(JSON.parse(messageOutput.body));
@@ -18,16 +31,27 @@ function connect() {
     });
 }
 
-function sendMessage() {
-    var voteIndex = document.getElementById('vote').value;
+function sendMessage(voteIndex) {
     stompClient.send("/vote", {}, JSON.stringify({ voteIndex }));
 }
 
+function render() {
+    if (votes.length > 0) {
+        const occ = _.countBy(votes.map(v => v.voteIndex));
+        console.log(occ);
+        let valLeft = occ[0]/votes.length * 100; // should be %age of width
+        let valRight = occ[1]/votes.length * 100;
+        valLeft = Number.isNaN(valLeft) ? 0 : valLeft;
+        valRight = Number.isNaN(valRight) ? 0 : valRight;
+        valLeft = valLeft > 50 ? Math.min(valLeft, 90) : Math.max(valLeft, 10);
+        valRight = valRight > 50 ? Math.min(valRight, 90) : Math.max(valRight, 10);
+        document.getElementsByClassName('left')[0].style.width = valLeft + "%";
+        document.getElementsByClassName('right')[0].style.width = valRight + "%";
+    }
+}
+
 function showMessageOutput(messageOutput) {
-    console.log('messag output');
-    var response = document.getElementById('response');
-    var p = document.createElement('p');
-    p.style.wordWrap = 'break-word';
-    p.appendChild(document.createTextNode(messageOutput));
-    response.appendChild(p);
+    console.log(votes);
+    votes.push(messageOutput);
+    render();
 }

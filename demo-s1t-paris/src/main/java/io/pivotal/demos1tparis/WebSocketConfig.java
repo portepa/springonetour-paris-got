@@ -17,6 +17,13 @@ import java.util.Date;
 @EnableWebSocketMessageBroker
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
+
+    WebSocketConfig(VoteRepository voteRepository) {
+        this.voteRepository = voteRepository;
+    }
+
+    private final VoteRepository voteRepository;
+
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableSimpleBroker("/");
@@ -30,11 +37,10 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     }
 
     @MessageMapping("/vote")
-    @SendTo("/vote")
+//    @SendTo("/vote")
     public Vote send(Vote vote) throws Exception {
-        String time = new SimpleDateFormat("HH:mm").format(new Date());
         System.out.println("vote" + vote.getVoteIndex() + " received");
-        System.out.println("HEY GUYS ITS ME");
+        voteRepository.save(vote);
         return vote;
     }
 }

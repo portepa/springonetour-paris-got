@@ -40,6 +40,8 @@ helm init
 helm install --name my-postgres -f helm-db-conf.yml stable/postgresql
 ```
 
+We can also show that during this helm installation we leveraged Persistent External Storage (with Storage Claims), and dynamic load balancers.
+
 ## Deploy the service broker
 
 You need to wait for the ip of the service to spawn, then modify the `service-broker.yml`.
@@ -88,4 +90,24 @@ cf bind-service s1t-paris-backend my-psql-service-instanced
 
 ```
 cf start
+```
+
+## Show that data is written into Postgres on Kube
+
+```sh
+export POSTGRES_PASSWORD=$(kubectl get secret --namespace default my-postgres-postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
+kubectl run my-postgres-postgresql-client --rm --tty -i --restart='Never' --namespace default --image docker.io/bitnami/postgresql:10.7.0 --env="PGPASSWORD=$POSTGRES_PASSWORD" --command -- psql --host my-postgres-postgresql -U postgres -d mydb
+```
+
+Running this command will show you the different SQL schema. Take the instance that's been created when you configured the broker
+
+```sql
+\dn
+```
+
+Then we'll count the number of occurences of each vote in a simple SQL command. Change the <instance_uuid> in the command.
+
+
+```
+select vote_index, count(vote.id) from instance_ddacfc58_1f60_454d_939c_0b1a434eee37.vote GROUP BY vote_index;
 ```

@@ -1,0 +1,67 @@
+@font-face {
+  font-family: proximanova;
+  src: url(../fonts/ProximaNova-Thin.otf);
+}
+
+h1 {
+  font-family: proximanova, sans-serif;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.middle-content-section {
+  width:100%;
+  height:100%; 
+  margin:0; 
+  padding:0; 
+  white-space: nowrap;
+  font-size: 0;
+}
+.voting-elem {
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+  vertical-align: center; /* this line added in edit */
+  font-size: initial;
+  padding-top:25%;
+  padding-bottom:25%;
+  cursor: pointer;
+  -webkit-transition: width 1s;
+  transition: width 1s;
+}
+.left {
+  /* float:left; */
+  /* background-color: red; */
+  background-color: rgba(0, 181, 163, 0.7);
+  border-right: solid white 6px;
+}
+
+.right {
+  /* float:right; */
+  background-color: rgba(0, 159, 223, 0.7);
+}
+
+.voting-elem > span {
+  background-color: rgba(36, 53, 135, 0.9);
+  color: white;
+  opacity: 1;
+  font-size: 4em;
+  padding: 3%;
+  border-radius: 5%;
+}
+
+.hero-full-screen {
+  height: 100vh;
+  background: url("/img/standup.jpg") center center no-repeat;
+  background-size: cover;
+}
+
+.hero-full-screen .middle-content-section {
+  text-align: center;
+  color: #fefefe;
+}
+

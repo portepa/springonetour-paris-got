@@ -1,6 +1,6 @@
 ---
 applications:
-  - name: s1t-paris-backend
+  - name: s1t-paris-dryrun
     memory: 1G
     instances: 1
     path: target/demo-s1t-paris-0.0.1-SNAPSHOT.jar
