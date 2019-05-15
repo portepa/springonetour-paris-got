@@ -1,0 +1,3 @@
+[submodule "generic-service-broker"]
+	path = generic-service-broker
+	url = https://github.com/alexandreroman/generic-service-broker
