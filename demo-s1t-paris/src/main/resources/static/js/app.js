@@ -47,6 +47,8 @@ function render() {
         valRight = valRight > 50 ? Math.min(valRight, 90) : Math.max(valRight, 10);
         document.getElementsByClassName('left')[0].style.width = valLeft + "%";
         document.getElementsByClassName('right')[0].style.width = valRight + "%";
+        document.getElementById('left-subtitle').innerHTML = occ[0] || 0;
+        document.getElementById('right-subtitle').innerHTML = occ[1] || 0;
     }
 }
 
