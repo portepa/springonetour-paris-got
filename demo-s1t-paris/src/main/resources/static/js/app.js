@@ -14,11 +14,25 @@ function httpGet(theUrl, callback)
 }
 
 
-httpGet('/vote', function(data) {
-    console.log(data);
-    votes = JSON.parse(data);
-    render();
+httpGet('/config', function(data) {
+    console.log('get config done');
+    console.log(JSON.parse(data));
+    if (JSON.parse(data).persistentDb) {
+        httpGet('/vote', function(data) {
+            console.log(data);
+            votes = JSON.parse(data);
+            render();
+        });
+    } else {
+        waitForDb();
+    }
 });
+
+
+function waitForDb() {
+    console.log('should wait for db');
+    document.getElementById('ifdb').style.display = "none";
+}
 
 function connect() {
     var socket = new SockJS('/sockjs');
@@ -36,6 +50,8 @@ function sendMessage(voteIndex) {
 }
 
 function render() {
+    document.getElementById('ifnodb').style.display = "none";
+    document.getElementById('ifdb').style.display = "block";
     if (votes.length > 0) {
         const occ = _.countBy(votes.map(v => v.voteIndex));
         console.log(occ);
