@@ -19,13 +19,13 @@ spec:
         image: portepa/service-broker
         env:
           - name: BROKER_SERVICE_URL
-            value: jdbc:postgresql://34.76.153.127:5432/mydb?user=postgres&password=easypassword&ssl=false
+            value: jdbc:postgresql://35.187.17.121:5432/mydb?user=postgres&password=easypassword&ssl=false
           - name: BROKER_SERVICE_ID
             value: psql-k8s-broker-id
           - name: BROKER_SERVICE_NAME
             value: psql-k8s-broker
           - name: BROKER_SERVICE_ICON
-            value: https://zdnet4.cbsistatic.com/hub/i/r/2018/04/19/092cbf81-acac-4f3a-91a1-5a26abc1721f/resize/370xauto/ce84e38cb1c1a7c5a2c9e4c337e108ba/postgresql-logo.png
+            value: https://s3-eu-west-1.amazonaws.com/public-pporte-bucket/ops-guy.png
           - name: BROKER_SERVICE_TAG
             value: my-tag
           - name: BROKER_CREDENTIALS_PASSWORD
