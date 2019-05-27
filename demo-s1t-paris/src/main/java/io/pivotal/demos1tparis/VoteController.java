@@ -15,10 +15,6 @@ import java.util.Map;
 @RestController
 class VoteController {
 
-    //VoteController(VoteRepository voteRepository) {
-    //    this.voteRepository = voteRepository;
-    //}
-
     @Autowired
     private VoteRepository voteRepository;
 

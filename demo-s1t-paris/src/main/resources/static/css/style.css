@@ -1,10 +1,10 @@
-@font-face {
+/* @font-face {
   font-family: proximanova;
   src: url(../fonts/ProximaNova-Thin.otf);
-}
+} */
 
 h1 {
-  font-family: proximanova, sans-serif;
+  font-family: /*proximanova,*/ sans-serif;
 }
 
 html, body {
