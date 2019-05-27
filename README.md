@@ -129,8 +129,3 @@ Then we'll count the number of occurences of each vote in a simple SQL command. 
 ```
 select vote_index, count(vote.id) from instance_ddacfc58_1f60_454d_939c_0b1a434eee37.vote GROUP BY vote_index;
 ```
-
-## License
-Copyright © 2019 Pivotal Software, Inc.
-
-This project is licensed under the Apache Software License version 2.0.
