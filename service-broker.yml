@@ -19,7 +19,7 @@ spec:
         image: portepa/service-broker
         env:
           - name: BROKER_SERVICE_URL
-            value: jdbc:postgresql://35.187.17.121:5432/mydb?user=postgres&password=easypassword&ssl=false
+            value: jdbc:postgresql://35.187.17.121:5432/mydb?user=postgres&password=YOURPASSWORD&ssl=false
           - name: BROKER_SERVICE_ID
             value: psql-k8s-broker-id
           - name: BROKER_SERVICE_NAME

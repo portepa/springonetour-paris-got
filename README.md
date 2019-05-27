@@ -1,5 +1,11 @@
 # Demo
 
+Be careful there might be some hardcoded values (ips, password) make sure to look at the file you're running and edit with what you need 👍.
+
+E.g: you might want to change the password (`postgresqlPassword`) in `helm-db-conf.yml`. You'll also need to change it in the broker YML definition, line 22 of `service-broker.yml`, in the parameters of the postgres jdbc url.
+
+The other password you might want to change is the servicebroker password, line 32 of the `service-broker.yml`, then make sure to use at the step "Create the service broker on PAS Marketplace" while doing the `cf create-service-broker` command.
+
 ## Deploy a K8S cluster
 
 ```
@@ -46,7 +52,7 @@ We can also show that during this helm installation we leveraged Persistent Exte
 
 ### Optional step
 
-We can build the docker image using the [cloud native buildpacks](buildpacks.io).
+We can build the docker image using the [cloud native buildpacks](buildpacks.io). Change the name of your image (here `portepa/service-broker`) for your current env.
 
 ```sh
 cd generic-service-broker
@@ -123,3 +129,8 @@ Then we'll count the number of occurences of each vote in a simple SQL command. 
 ```
 select vote_index, count(vote.id) from instance_ddacfc58_1f60_454d_939c_0b1a434eee37.vote GROUP BY vote_index;
 ```
+
+## License
+Copyright © 2019 Pivotal Software, Inc.
+
+This project is licensed under the Apache Software License version 2.0.

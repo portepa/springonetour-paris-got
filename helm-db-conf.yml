@@ -1,4 +1,4 @@
-postgresqlPassword: easypassword
+postgresqlPassword: YOURPASSWORD
 postgresqlDatabase: mydb
 service:
   type: LoadBalancer
